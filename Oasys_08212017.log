@@ -1,0 +1,141 @@
+
+D:\Build\FA\STAGE>ant -v -f build.xml -Dbuild.properties.file=build.properties 
+Apache Ant(TM) version 1.9.7 compiled on April 9 2016
+Buildfile: D:\Build\FA\STAGE\build.xml
+Detected Java version: 1.7 in: D:\JDK7\jre
+Detected OS: Windows Server 2008 R2
+parsing buildfile D:\Build\FA\STAGE\build.xml with URI = file:/D:/Build/FA/STAGE/build.xml
+Project base dir set to: D:\Build\FA\STAGE
+parsing buildfile jar:file:/D:/apache-ant-1.9.7/lib/ant.jar!/org/apache/tools/ant/antlib.xml with URI = jar:file:/D:/apache-ant-1.9.7/lib/ant.jar!/org/apache/tools/ant/antlib.xml from a zip file
+Build sequence for target(s) `all' is [initialize, cleanup, vcget, JDBC_Stage_Pool, mvn-build, ear-build, all]
+Complete build sequence is [initialize, cleanup, vcget, JDBC_Stage_Pool, mvn-build, ear-build, all, JDBC_QA_Pool, JDBC_Prod_Pool, , JDBC_VDEV_Pool]
+
+initialize:
+     [echo] ++ Reading D:\Build\FA\STAGE/build.properties file...
+ [property] Loading D:\Build\FA\STAGE\build.properties
+Property "fo.project.repository.username" has not been set
+
+cleanup:
+     [echo] ++ Cleaning up output and _workdir folders...
+   [delete] Could not find file D:\Build\FA\STAGE\oasys-ws\application.xml to delete.
+   [delete] Could not find file D:\Build\FA\STAGE\oasys-ws\pom.xml to delete.
+    [mkdir] Created dir: D:\Build\FA\STAGE\oasys-ws\target
+
+vcget:
+     [echo] ++ Fetch all files from Version Control...
+     [echo] //pwsaaspvc01/vmprojects/Polaris
+     [exec] Current OS is Windows Server 2008 R2
+     [exec] Executing 'pcli' with arguments:
+     [exec] 'get'
+     [exec] '-pr//pwsaaspvc01/vmprojects/Polaris'
+     [exec] '-aD:\Build\FA\STAGE/oasys-ws'
+     [exec] '-vv20170821_Stage'
+     [exec] '-z'
+     [exec] '-bp/oasys-ws'
+     [exec] '-w'
+     [exec] '/oasys-ws'
+     [exec] 
+     [exec] The ' characters around the executable and arguments are
+     [exec] not part of the command.
+     [exec] Serena PVCS Version Manager (PCLI) v8.5.0.0 (Build 055) for Windows NT/80x86
+     [exec] Copyright (C) 1985-2013 Serena Software. All rights reserved.
+     [exec] D:\Build\FA\STAGE\oasys-ws\application.xml <- /oasys-ws/application.xml Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\pom.xml <- /oasys-ws/pom.xml Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\bo\impl\OratalAdminImpl.java <- /oasys-ws/src/main/java/com/oasys/bo/impl/OratalAdminImpl.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\bo\OratalAdmin.java <- /oasys-ws/src/main/java/com/oasys/bo/OratalAdmin.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\dao\impl\DBConnection.java <- /oasys-ws/src/main/java/com/oasys/dao/impl/DBConnection.java Fetched revision 1.1.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\dao\impl\OratalAdminDAOImpl.java <- /oasys-ws/src/main/java/com/oasys/dao/impl/OratalAdminDAOImpl.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\dao\impl\ReadProperties.java <- /oasys-ws/src/main/java/com/oasys/dao/impl/ReadProperties.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\dao\OratalAdminDAO.java <- /oasys-ws/src/main/java/com/oasys/dao/OratalAdminDAO.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\JSONRequest.java <- /oasys-ws/src/main/java/com/oasys/model/JSONRequest.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpAgent.java <- /oasys-ws/src/main/java/com/oasys/model/SpAgent.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpAgentProductData.java <- /oasys-ws/src/main/java/com/oasys/model/SpAgentProductData.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpPolicyCommSched.java <- /oasys-ws/src/main/java/com/oasys/model/SpPolicyCommSched.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpPolicyRiderFund.java <- /oasys-ws/src/main/java/com/oasys/model/SpPolicyRiderFund.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpProductCommSched.java <- /oasys-ws/src/main/java/com/oasys/model/SpProductCommSched.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpProductData.java <- /oasys-ws/src/main/java/com/oasys/model/SpProductData.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpProductDataCUSIP.java <- /oasys-ws/src/main/java/com/oasys/model/SpProductDataCUSIP.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpProductFeeData.java <- /oasys-ws/src/main/java/com/oasys/model/SpProductFeeData.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\model\SpProductRiderFund.java <- /oasys-ws/src/main/java/com/oasys/model/SpProductRiderFund.java Fetched revision 1.0.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\java\com\oasys\rest\OASysWebServices.java <- /oasys-ws/src/main/java/com/oasys/rest/OASysWebServices.java Fetched revision 1.2.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\resources\general_conf.properties <- /oasys-ws/src/main/resources/general_conf.properties Fetched revision 1.1.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\resources\log4j.properties <- /oasys-ws/src/main/resources/log4j.properties Fetched revision 1.1.
+     [exec] D:\Build\FA\STAGE\oasys-ws\src\main\webapp\WEB-INF\web.xml <- /oasys-ws/src/main/webapp/WEB-INF/web.xml Fetched revision 1.1.
+
+JDBC_Stage_Pool:
+     [echo] Start- Find and Replace data in web.xml ,properties file -STAGE Env
+  [replace] Replacing in D:\Build\FA\STAGE\oasys-ws\src\main\resources\general_conf.properties: $oasys_jdbc_pool$ --> jdbc/stage-oasys-pool
+  [replace] Replacing in D:\Build\FA\STAGE\oasys-ws\src\main\webapp\WEB-INF\web.xml: $oasys_jdbc_pool$ --> jdbc/stage-oasys-pool
+  [replace] Replacing in D:\Build\FA\STAGE\oasys-ws\src\main\resources\log4j.properties: $fa.server.path$ --> /app/WebApps/STG/oasys-ws-ear.ear
+     [echo] End - Replacing data - STAGE Env
+
+mvn-build:
+     [echo] ++ Doing Maven Build
+     [exec] Current OS is Windows Server 2008 R2
+     [exec] Executing 'mvn.bat' with arguments:
+     [exec] 'clean'
+     [exec] 'install'
+     [exec] '-Dmaven.test.skip=true'
+     [exec] 
+     [exec] The ' characters around the executable and arguments are
+     [exec] not part of the command.
+     [exec] [INFO] Scanning for projects...
+     [exec] [INFO]                                                                         
+     [exec] [INFO] ------------------------------------------------------------------------
+     [exec] [INFO] Building OASys WebServices FA Portal 1.0-SNAPSHOT
+     [exec] [INFO] ------------------------------------------------------------------------
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ oasys-ws ---
+     [exec] [INFO] Deleting D:\Build\FA\STAGE\oasys-ws\target
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ oasys-ws ---
+     [exec] [WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+     [exec] [INFO] Copying 2 resources
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ oasys-ws ---
+     [exec] [INFO] Changes detected - recompiling the module!
+     [exec] [WARNING] File encoding has not been set, using platform encoding Cp1252, i.e. build is platform dependent!
+     [exec] [INFO] Compiling 17 source files to D:\Build\FA\STAGE\oasys-ws\target\classes
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ oasys-ws ---
+     [exec] [INFO] Not copying test resources
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ oasys-ws ---
+     [exec] [INFO] Not compiling test sources
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ oasys-ws ---
+     [exec] [INFO] Tests are skipped.
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-war-plugin:2.2:war (default-war) @ oasys-ws ---
+     [exec] [INFO] Packaging webapp
+     [exec] [INFO] Assembling webapp [oasys-ws] in [D:\Build\FA\STAGE\oasys-ws\target\oasys-ws]
+     [exec] [INFO] Processing war project
+     [exec] [INFO] Copying webapp resources [D:\Build\FA\STAGE\oasys-ws\src\main\webapp]
+     [exec] [INFO] Webapp assembled in [578 msecs]
+     [exec] [INFO] Building war: D:\Build\FA\STAGE\oasys-ws\target\oasys-ws.war
+     [exec] [INFO] WEB-INF\web.xml already added, skipping
+     [exec] [INFO] 
+     [exec] [INFO] --- maven-install-plugin:2.4:install (default-install) @ oasys-ws ---
+     [exec] [INFO] Installing D:\Build\FA\STAGE\oasys-ws\target\oasys-ws.war to D:\build\.m2\repository\com\oasys\oasys-ws\1.0-SNAPSHOT\oasys-ws-1.0-SNAPSHOT.war
+     [exec] [INFO] Installing D:\Build\FA\STAGE\oasys-ws\pom.xml to D:\build\.m2\repository\com\oasys\oasys-ws\1.0-SNAPSHOT\oasys-ws-1.0-SNAPSHOT.pom
+     [exec] [INFO] ------------------------------------------------------------------------
+     [exec] [INFO] BUILD SUCCESS
+     [exec] [INFO] ------------------------------------------------------------------------
+     [exec] [INFO] Total time: 4.214 s
+     [exec] [INFO] Finished at: 2017-08-21T14:03:43-07:00
+     [exec] [INFO] Final Memory: 15M/26M
+     [exec] [INFO] ------------------------------------------------------------------------
+
+ear-build:
+      [ear] Building ear: D:\Build\FA\STAGE\oasys-ws.ear
+      [ear] adding directory META-INF/
+      [ear] adding entry META-INF/MANIFEST.MF
+      [ear] adding entry META-INF/application.xml
+      [ear] adding entry oasys-ws.war
+      [ear] No Implementation-Title set.No Implementation-Version set.No Implementation-Vendor set.
+      [ear] Location: D:\Build\FA\STAGE\build.xml:123: 
+
+all:
+
+BUILD SUCCESSFUL
+Total time: 7 seconds

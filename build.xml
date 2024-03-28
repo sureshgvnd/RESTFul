@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="oasys-ws" default="all" basedir=".">
+<description>oasys-ws build configuration file</description>  
+<target name="all" depends="initialize,cleanup,vcget,JDBC_Stage_Pool,mvn-build,ear-build" if="build.properties.file"/>  
+   
+   <target name="initialize" if="build.properties.file"> 
+      <echo message="++ Reading ${basedir}/${build.properties.file} file..." />
+      <property file="${basedir}/${build.properties.file}" />
+      <tstamp prefix="build-info">
+         <format property="current-date" pattern="d-MMMM-yyyy hh:mm:ss" locale="en,US" />
+      </tstamp>	  
+      	  <property name="vc.arg" value="--username ${fo.project.repository.username} --no-auth-cache --non-interactive --trust-server-cert checkout" />	  
+	  <property name="vc.baseuri" value="${fo.project.repository}" />
+	  <property name="build.dir" value="${basedir}/oasys-ws" />
+   </target> 
+   
+   <target name="cleanup" depends="initialize">
+      <echo message="++ Cleaning up output and _workdir folders..." />
+      <delete file="${build.dir}/application.xml" />     
+      <delete file="${build.dir}/pom.xml" />     
+      <delete dir="${build.dir}/target" />     
+      <delete dir="${build.dir}/src" />     
+      <mkdir dir="${build.dir}/target" />	  
+   </target>
+   
+     <target name="vcget" depends="initialize" if="${use.vc}">
+   	<echo message="++ Fetch all files from Version Control..." />
+   	<echo message ="${vc.baseuri}" />   	   	
+   	<exec executable="pcli">
+   		 <arg line="get -pr${vc.baseuri} -a${build.dir} -v${fa.project.version} -z -bp/oasys-ws -w /oasys-ws" />
+   	</exec> 
+    </target>
+   
+   <target name="JDBC_VDEV_Pool" if="${vdev.env.build}">
+   			<!-- Copy JDBC Pool name based on environment  -->
+   					
+   			<echo message="Start- Find and Replace data in web.xml ,properties file -VDEV Env" />								
+   			
+   			<replace file="${build.dir}/src/main/resources/general_conf.properties">		 	     			    
+   			    <replacefilter token="$oasys_jdbc_pool$" value="${vdev.oasys}"/>		 	  
+   			</replace>
+   				
+   			<replace file="${build.dir}/src/main/webapp/WEB-INF/web.xml">		 	  
+			   <replacefilter token="$oasys_jdbc_pool$" value="${vdev.oasys}"/>		 	  
+   			</replace>
+
+			<replace file="${build.dir}/src/main/resources/log4j.properties">		 	     			    
+   			    <replacefilter token="$fa.server.path$" value="${server.path}"/>		 	  
+   			</replace>
+		
+   			<echo message="End - Replacing data - VDEV Env" />		
+   </target>	
+   
+    <target name="JDBC_QA_Pool" if="${qa.env.build}">
+      			<!-- Copy JDBC Pool name based on environment  -->
+      					
+      			<echo message="Start- Find and Replace data in web.xml ,properties file -QA Env" />								
+      			
+      			<replace file="${build.dir}/src/main/resources/general_conf.properties">		 	     			    
+      			    <replacefilter token="$oasys_jdbc_pool$" value="${qa.oasys}"/>		 	  
+      			</replace>
+      				
+      			<replace file="${build.dir}/src/main/webapp/WEB-INF/web.xml">		 	  
+   			   <replacefilter token="$oasys_jdbc_pool$" value="${qa.oasys}"/>		 	  
+      			</replace>
+
+			<replace file="${build.dir}/src/main/resources/log4j.properties">		 	     			    
+   			    <replacefilter token="$fa.server.path$" value="${server.path}"/>		 	  
+   			</replace>
+   		
+      			<echo message="End - Replacing data - QA Env" />		
+   </target>	
+   
+    <target name="JDBC_Stage_Pool" if="${stage.env.build}">
+      			<!-- Copy JDBC Pool name based on environment  -->
+      					
+      			<echo message="Start- Find and Replace data in web.xml ,properties file -STAGE Env" />								
+      			
+      			<replace file="${build.dir}/src/main/resources/general_conf.properties">		 	     			    
+      			    <replacefilter token="$oasys_jdbc_pool$" value="${stage.oasys}"/>		 	  
+      			</replace>
+      				
+      			<replace file="${build.dir}/src/main/webapp/WEB-INF/web.xml">		 	  
+   			   <replacefilter token="$oasys_jdbc_pool$" value="${stage.oasys}"/>		 	  
+      			</replace>
+			
+			<replace file="${build.dir}/src/main/resources/log4j.properties">		 	     			    
+   			    <replacefilter token="$fa.server.path$" value="${server.path}"/>		 	  
+   			</replace>
+   		
+      			<echo message="End - Replacing data - STAGE Env" />		
+   </target>	
+   
+    <target name="JDBC_Prod_Pool" if="${prod.env.build}">
+      			<!-- Copy JDBC Pool name based on environment  -->
+      					
+      			<echo message="Start- Find and Replace data in web.xml ,properties file -PROD Env" />								
+      			
+      			<replace file="${build.dir}/src/main/resources/general_conf.properties">		 	     			    
+      			    <replacefilter token="$oasys_jdbc_pool$" value="${prod.oasys}"/>		 	  
+      			</replace>
+      				
+      			<replace file="${build.dir}/src/main/webapp/WEB-INF/web.xml">		 	  
+   			   <replacefilter token="$oasys_jdbc_pool$" value="${prod.oasys}"/>		 	  
+      			</replace>
+
+			<replace file="${build.dir}/src/main/resources/log4j.properties">		 	     			    
+   			    <replacefilter token="$fa.server.path$" value="${server.path}"/>		 	  
+   			</replace>
+   		
+      			<echo message="End - Replacing data - PROD Env" />		
+   </target>	
+   
+   
+   <target name="mvn-build" depends="initialize">
+   	<echo message="++ Doing Maven Build" />   	 	
+   	<exec dir="${basedir}/oasys-ws" executable="mvn.bat">
+   		<arg line="clean install -Dmaven.test.skip=true" />
+   	</exec>
+  </target>  
+  
+  <target name="ear-build">
+       <ear destfile="oasys-ws.ear" appxml="${basedir}/oasys-ws/application.xml">
+       <fileset dir="${build.dir}/target" includes="oasys-ws.war"/>        	
+    	<manifest>
+     	  <attribute name="Built-By" value="${user.name}" />
+            <attribute name="Built-Version" value="1.0" />
+    	  <attribute name="Build-Date" value="${build-info.current-date}" />
+          </manifest>           
+       </ear>
+ </target>     
+</project>

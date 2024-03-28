@@ -1,0 +1,1 @@
+ant -v -f build.xml -Dbuild.properties.file=build.properties
